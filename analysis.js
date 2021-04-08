@@ -126,17 +126,21 @@ function complexity(filePath)
 
 			builders[builder.FunctionName] = builder;
 		}
+		if (node.type === 'Literal')
 
+			i += 1;
 	});
+	
+	fileBuilder.Strings = i
 
 }
 
 // Helper function for counting children of node.
-function childrenLength(node)
+function childrenLength(file)
 {
 	var key, child;
 	var count = 0;
-	for (key in node) 
+	for (key in file) 
 	{
 		if (node.hasOwnProperty(key)) 
 		{
@@ -149,6 +153,7 @@ function childrenLength(node)
 	}	
 	return count;
 }
+
 
 
 // Helper function for checking if a node is a "decision type node"
