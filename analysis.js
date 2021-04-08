@@ -11,6 +11,7 @@ function main()
 		args = ["analysis.js"];
 	}
 	var filePath = args[0];
+	console.log("Hello!" + filePath);
 	
 	complexity(filePath);
 
@@ -120,6 +121,7 @@ function complexity(filePath)
 			var builder = new FunctionBuilder();
 
 			builder.FunctionName = functionName(node);
+			builder.ParameterCount = node.params.length;
 			builder.StartLine    = node.loc.start.line;
 
 			builders[builder.FunctionName] = builder;
