@@ -105,7 +105,7 @@ function complexity(filePath)
 	var buf = fs.readFileSync(filePath, "utf8");
 	var ast = esprima.parse(buf, options);
 
-	var i = 0;
+	var i = 0; 
 
 	// A file level-builder:
 	var fileBuilder = new FileBuilder();
@@ -119,18 +119,31 @@ function complexity(filePath)
 		if (node.type === 'FunctionDeclaration') 
 		{
 			var builder = new FunctionBuilder();
+			
 
 			builder.FunctionName = functionName(node);
 			builder.ParameterCount = node.params.length;
 			builder.StartLine    = node.loc.start.line;
 
+			var j = 0;			
+			traverseWithParents(node, function(node){
+				if (isDecision(node)){
+					j += 1;
+				}
+			})
+
+			builder.SimpleCyclomaticComplexity = j
+
+
+
 			builders[builder.FunctionName] = builder;
 		}
-		if (node.type === 'Literal')
-
+		if (node.type === 'Literal'){
 			i += 1;
+		}
+
 	});
-	
+
 	fileBuilder.Strings = i
 
 }
@@ -154,6 +167,8 @@ function childrenLength(file)
 	return count;
 }
 
+
+// Helper functino for counting decision type nodes.
 
 
 // Helper function for checking if a node is a "decision type node"
