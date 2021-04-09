@@ -125,14 +125,26 @@ function complexity(filePath)
 			builder.ParameterCount = node.params.length;
 			builder.StartLine    = node.loc.start.line;
 
-			var j = 0;			
+			var decisions = 1;
+			var conditions = 0;			
 			traverseWithParents(node, function(node){
 				if (isDecision(node)){
-					j += 1;
+					decisions += 1;
+					var temp_conditions = 0;
+					
+					traverseWithParents(node, function(node){
+						if (node.type === 'LogicalExpression'){
+							temp_conditions ++;
+						}
+					})
+					if (temp_conditions > conditions){
+						conditions = temp_conditions
+					}
 				}
 			})
 
-			builder.SimpleCyclomaticComplexity = j
+			builder.SimpleCyclomaticComplexity = decisions
+			builder.MaxConditions = conditions
 
 
 
