@@ -130,7 +130,7 @@ function complexity(filePath)
 			traverseWithParents(node, function(node){
 				if (isDecision(node)){
 					decisions += 1;
-					var temp_conditions = 0;
+					var temp_conditions = 1;
 					
 					traverseWithParents(node, function(node){
 						if (node.type === 'LogicalExpression'){
