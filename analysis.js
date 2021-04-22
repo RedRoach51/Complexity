@@ -123,6 +123,15 @@ function complexity(filePath)
 			builder.ParameterCount = node.params.length;
 			builder.StartLine    = node.loc.start.line;
 
+			var j = 0;			
+			traverseWithParents(node, function(node){
+				if (isDecision(node)){
+					j += 1;
+				}
+			})
+
+			builder.SimpleCyclomaticComplexity = j
+
 			builders[builder.FunctionName] = builder;
 		}
 		if (node.type === 'Literal')
