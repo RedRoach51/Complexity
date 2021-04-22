@@ -120,6 +120,7 @@ function complexity(filePath)
 			var builder = new FunctionBuilder();
 
 			builder.FunctionName = functionName(node);
+			builder.ParameterCount = node.params.length;
 			builder.StartLine    = node.loc.start.line;
 
 			builders[builder.FunctionName] = builder;
