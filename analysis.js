@@ -125,8 +125,12 @@ function complexity(filePath)
 
 			builders[builder.FunctionName] = builder;
 		}
+		if (node.type === 'Literal')
 
+			i += 1;
 	});
+
+	fileBuilder.Strings = i
 
 }
 
