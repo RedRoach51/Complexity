@@ -8,7 +8,7 @@ function main()
 
 	if( args.length == 0 )
 	{
-		args = ["analysis.js"];
+		args = ["mystery.js"];
 	}
 	var filePath = args[0];
 	console.log("Hello!" + filePath);
@@ -151,6 +151,12 @@ function complexity(filePath)
 
 	fileBuilder.Strings = i
 
+}
+
+function getStrings(){
+	for (var node in builders){
+		return builders[node].Strings;
+	}	
 }
 
 // Helper function for counting children of node.
@@ -299,3 +305,4 @@ mints.toString().split(".")[0] + " " + szmin;
       }
   }
  exports.complexity = complexity;
+ exports.getStrings = getStrings;
